@@ -7,21 +7,40 @@
 //
 
 #import "ViewController.h"
+#import "ROLControlPanel.h"
 
-@interface ViewController ()
-
+@interface ViewController () <ROLControlPanelDelegagte>
 @end
 
 @implementation ViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view, typically from a nib.
+    self.view = [[UIView alloc] initWithFrame:[UIScreen mainScreen].bounds];
+    self.view.backgroundColor = [UIColor whiteColor];
+    ROLControlPanel *panelView = [[ROLControlPanel alloc] initWithParentView:self.view];
+    panelView.delegate = self;
+    //panelView.slideAnimationDuration = 0.5;
+//    panelView.PanelCloseBlock = ^(void) {
+//        NSLog(@"Block panel close!");
+//    };
+//    panelView.PanelRevealBlock = ^(void) {
+//        NSLog(@"Block panel reveal!");
+//    };
+    
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)panelReveal {
+    NSLog(@"Delegate panel reveal!");
+}
+
+- (void)panelClose {
+    NSLog(@"Delegate panel close!");
 }
 
 @end
