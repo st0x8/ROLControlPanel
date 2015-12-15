@@ -1,8 +1,9 @@
 ### ROLControlPanel
 
 A custom view like iOS  Controller Center and Notification Center. Support swiping gesture.
-![Screenshot](https://github.com/st0x8/ROLControlPanel/raw/master/ScreenShot/ScreenShot.gif)
-
+<p align="center">
+<img style='border:1px solid #ccc;' src="https://github.com/st0x8/ROLControlPanel/raw/master/ScreenShot/ScreenShot.gif">
+</p>
 ### Feartures
 
 - A drawer that can slide up and down. 
