@@ -1,6 +1,6 @@
 ### ROLControlPanel
 
-A custom view like iOS  controller center and noti. Support swiping gesture.
+A custom view like iOS  Controller Center and Notification Center. Support swiping gesture.
 ![Screenshot](https://github.com/st0x8/ROLControlPanel/raw/master/ScreenShot/ScreenShot.gif)
 
 ### Feartures

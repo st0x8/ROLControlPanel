@@ -5,6 +5,8 @@
 //  Created by Roy Lin on 15/12/3.
 //  Copyright © 2015年 Roy Lin. All rights reserved.
 //
+//  https://github.com/st0x8/ROLControlPanel
+//
 
 #import "ViewController.h"
 #import "ROLControlPanel.h"
@@ -20,13 +22,13 @@
     self.view.backgroundColor = [UIColor whiteColor];
     ROLControlPanel *panelView = [[ROLControlPanel alloc] initWithParentView:self.view];
     panelView.delegate = self;
-    //panelView.slideAnimationDuration = 0.5;
-//    panelView.PanelCloseBlock = ^(void) {
-//        NSLog(@"Block panel close!");
-//    };
-//    panelView.PanelRevealBlock = ^(void) {
-//        NSLog(@"Block panel reveal!");
-//    };
+    panelView.slideAnimationDuration = 0.5;//default is 0.33
+    panelView.PanelCloseBlock = ^(void) {
+        NSLog(@"Block panel close!");
+    };
+    panelView.PanelRevealBlock = ^(void) {
+        NSLog(@"Block panel reveal!");
+    };
     
 }
 
