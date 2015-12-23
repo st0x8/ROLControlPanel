@@ -25,7 +25,7 @@
 @implementation ROLControlPanel
 
 - (instancetype)initWithParentView:(UIView *)parentView {
-    CGRect panelFrame = [UIScreen mainScreen].bounds;
+    CGRect panelFrame = [self getFrameFromOrientation];
     if (self = [super initWithFrame:panelFrame]) {
         CGRect containerRect = panelFrame;
         containerRect.size.height = panelFrame.size.height * 0.65;
@@ -122,6 +122,22 @@
     }
 }
 
+- (CGRect)getFrameFromOrientation {
+    CGRect frame = [UIScreen mainScreen].bounds;
+    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0) {
+        return frame;
+    } else {
+        UIInterfaceOrientation orientation = [UIApplication sharedApplication].statusBarOrientation;
+        if (UIInterfaceOrientationIsLandscape(orientation)) {
+            CGRect landscpeeFrame = frame;
+            landscpeeFrame.size.height = frame.size.width;
+            landscpeeFrame.size.width = frame.size.height;
+            return landscpeeFrame;
+        }
+        return frame;
+    }
+}
+
 #pragma mark Setter & Getter
 - (void)setEnableSwipeGesture:(BOOL)enableSwipeGesture {
     _enableSwipeGesture = enableSwipeGesture;
@@ -192,76 +208,50 @@
     self.frame = rect;
 }
 
-- (CGFloat)horizontalLocation {
-    CGRect rect = self.frame;
-    UIInterfaceOrientation orientation = [UIApplication sharedApplication].statusBarOrientation;
-    if (floor(NSFoundationVersionNumber) >= NSFoundationVersionNumber_iOS_8_0) {
-        return rect.origin.x;
-    } else {
-        if (UIInterfaceOrientationIsLandscape(orientation)) {
-            return (orientation == UIInterfaceOrientationLandscapeRight) ? rect.origin.y : rect.origin.y*-1;
-        } else {
-            return (orientation == UIInterfaceOrientationMaskPortrait) ? rect.origin.x : rect.origin.x*-1;
-        }
-    }
-}
+//- (CGFloat)horizontalLocation {
+//    CGRect rect = self.frame;
+//    UIInterfaceOrientation orientation = [UIApplication sharedApplication].statusBarOrientation;
+//    if (floor(NSFoundationVersionNumber) >= NSFoundationVersionNumber_iOS_8_0) {
+//        return rect.origin.x;
+//    } else {
+//        if (UIInterfaceOrientationIsLandscape(orientation)) {
+//            return (orientation == UIInterfaceOrientationLandscapeRight) ? rect.origin.y : rect.origin.y*-1;
+//        } else {
+//            return (orientation == UIInterfaceOrientationMaskPortrait) ? rect.origin.x : rect.origin.x*-1;
+//        }
+//    }
+//}
 
 - (CGFloat)verticalLocation {
     CGRect rect = self.frame;
-    UIInterfaceOrientation orientation = [UIApplication sharedApplication].statusBarOrientation;
-    if (floor(NSFoundationVersionNumber) >= NSFoundationVersionNumber_iOS_8_0) {
-        return rect.origin.y;
-    } else {
-        if (UIInterfaceOrientationIsLandscape(orientation)) {
-            return (orientation == UIInterfaceOrientationLandscapeRight) ? rect.origin.x : rect.origin.x*-1;
-        } else {
-            return (orientation == UIInterfaceOrientationMaskPortrait) ? rect.origin.y : rect.origin.y*-1;
-        }
-    }
+    return rect.origin.y;
 }
 
-- (CGFloat)horizontalSize {
-    
-    CGRect rect = self.frame;
-    UIInterfaceOrientation orientation = [UIApplication sharedApplication].statusBarOrientation;
-    
-    if ((floor(NSFoundationVersionNumber) >= NSFoundationVersionNumber_iOS_8_0))
-    {
-        return rect.size.width;
-    }
-    else
-    {
-        if (UIInterfaceOrientationIsLandscape(orientation))
-        {
-            return rect.size.height;
-        }
-        else
-        {
-            return rect.size.width;
-        }
-    }
-}
+//- (CGFloat)horizontalSize {
+//    
+//    CGRect rect = self.frame;
+//    UIInterfaceOrientation orientation = [UIApplication sharedApplication].statusBarOrientation;
+//    
+//    if ((floor(NSFoundationVersionNumber) >= NSFoundationVersionNumber_iOS_8_0))
+//    {
+//        return rect.size.width;
+//    }
+//    else
+//    {
+//        if (UIInterfaceOrientationIsLandscape(orientation))
+//        {
+//            return rect.size.height;
+//        }
+//        else
+//        {
+//            return rect.size.width;
+//        }
+//    }
+//}
 
 - (CGFloat)verticalSize {
-    
     CGRect rect = self.frame;
-    UIInterfaceOrientation orientation = [UIApplication sharedApplication].statusBarOrientation;
-    
-    if ((floor(NSFoundationVersionNumber) >= NSFoundationVersionNumber_iOS_8_0))
-    {
-        return rect.size.height;
-    }
-    else
-    {
-        if (UIInterfaceOrientationIsLandscape(orientation))
-        {
-            return rect.size.width;
-        }
-        else
-        {
-            return rect.size.height;
-        }
-    }
+    return rect.size.height;
 }
 
 - (CGFloat)minYUpDragging {
